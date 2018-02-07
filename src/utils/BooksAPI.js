@@ -42,14 +42,3 @@ fetch(`${api}/search`, {
   body: JSON.stringify({ query })
 }).then(res => res.json())
 .then(data => data.books)
-
-// export const updateRating = (book, averageRating) => {
-//   fetch(`${api}/books/${book.id}`, {
-//     method: 'PUT',
-//     headers: {
-//       ...headers,
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({ averageRating })
-//   }).then(res => res.json())
-// }
