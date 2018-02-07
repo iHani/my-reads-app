@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Dropdown, Icon } from 'semantic-ui-react';
 
 class ShelfChanger extends Component {
+  static propTypes = {
+    book: PropTypes.object.isRequired,
+    shelf: PropTypes.string,
+    HandleChangingShelf: PropTypes.func.isRequired
+  }
 
   state = {
     options: [

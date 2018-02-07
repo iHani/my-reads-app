@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Rating } from 'semantic-ui-react';
 
 class BookRating extends Component {
@@ -20,5 +21,10 @@ class BookRating extends Component {
     )
   }
 }
+
+BookRating.propTypes = {
+  defaultRate: PropTypes.number,
+  book: PropTypes.object
+};
 
 export default BookRating;

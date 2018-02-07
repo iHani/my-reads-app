@@ -15,12 +15,10 @@ const App = () => (
       exact
       path='/'
       component={HomePage}
-      // render={() => (<HomePage />)}
     />
     <Route
       path='/search'
       component={SearchPage}
-      // render={() => (<SearchPage />)}
     />
   </Container>
 );
