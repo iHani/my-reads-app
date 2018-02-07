@@ -21,7 +21,6 @@ class ShelfChanger extends Component {
     const currentshelf = book.shelf;
     const newShelf = options[value].key;
     if (newShelf !== currentshelf) {
-      book.shelf = newShelf;
       this.props.HandleChangingShelf(book, newShelf);
     }
   }

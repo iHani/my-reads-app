@@ -2,6 +2,8 @@
 
 My Reads App is a React app that lets you organize your 'currently reading', 'want to read', and 'read' books in a single page.
 
+![](assets/screenshot.png)
+
 ### Installation
 
 Clone this repo then install the dependencies and start the server.

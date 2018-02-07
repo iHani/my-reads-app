@@ -19,6 +19,7 @@ class SearchPage extends Component {
 
   HandleChangingShelf = (book, shelf) => {
     BooksAPI.update(book, shelf).then(() => {
+      book.shelf = shelf
       this.setState({
         books: this.state.books.filter(b => b.id !== book.id).concat(book)
       });
