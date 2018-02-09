@@ -11,15 +11,15 @@ class ShelfChanger extends Component {
 
   state = {
     options: [
-      { key: 'currentlyReading', value: 0, text: 'Currently Reading', icon: this.props.shelf === 'currentlyReading' ? 'check' : '' },
-      { key: 'wantToRead', value: 1, text: 'Want to Read', icon: this.props.shelf === 'wantToRead' ? 'check' : '' },
-      { key: 'read', value: 2, text: 'Read', icon: this.props.shelf === 'read' ? 'check' : '' }
+      { key: 'currentlyReading', value: 'currentlyReading', text: 'Currently Reading', icon: this.props.shelf === 'currentlyReading' ? 'check' : '' },
+      { key: 'wantToRead', value: 'wantToRead', text: 'Want to Read', icon: this.props.shelf === 'wantToRead' ? 'check' : '' },
+      { key: 'read', value: 'read', text: 'Read', icon: this.props.shelf === 'read' ? 'check' : '' }
     ]
   }
 
   handleOnChange = (e, { book, options, value }) => {
     const currentshelf = book.shelf;
-    const newShelf = options[value].key;
+    const newShelf = value;
     if (newShelf !== currentshelf) {
       this.props.HandleChangingShelf(book, newShelf);
     }
@@ -27,9 +27,11 @@ class ShelfChanger extends Component {
 
   render() {
     const { book } = this.props;
-    const trigger = (<span><Icon name='dropdown'/></span>)
+    const trigger = <span><Icon name='dropdown'/></span>;
     return (
       <Dropdown
+        selectOnBlur={false}
+        defaultValue={book.shelf}
         book={book}
         options={this.state.options}
         onChange={this.handleOnChange}
