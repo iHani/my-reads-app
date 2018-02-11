@@ -5,7 +5,7 @@ import HomePage from './Components/HomePage';
 import SearchPage from './Components/SearchPage';
 
 const App = () => (
-  <Container style={{ padding: '3em 0em' }}>
+  <Container>
     <Header as='h1'>My Reads</Header>
     <Menu>
       <Link to='/'><Menu.Item >Home</Menu.Item></Link>
@@ -17,10 +17,11 @@ const App = () => (
       component={HomePage}
     />
     <Route
+      exact
       path='/search'
       component={SearchPage}
     />
   </Container>
-);
+)
 
 export default App;
