@@ -1,61 +1,51 @@
 import React, { Component } from 'react';
-import { Segment, Input } from 'semantic-ui-react';
-import escapeRegExp from 'escape-string-regexp';
+import { Input, Segment } from 'semantic-ui-react';
 import * as BooksAPI from '../utils/BooksAPI';
 import Shelf from './Shelf';
 
 class SearchPage extends Component {
 
   state = {
-    books: [],
-    query: ''
+    books: []
   }
 
-  componentDidMount() {
-    BooksAPI.getAll().then((books) => {
-      this.setState({ books });
-    })
+  filterBooks = (query) => {
+    BooksAPI.search(query.trim()).then(books => {
+      console.log(books[0]);
+      if (books && !books.error) {
+        this.setState({ books })
+      }
+    });
   }
 
-  HandleChangingShelf = (book, shelf) => {
+  updateShelf = (book, shelf) => {
     BooksAPI.update(book, shelf).then(() => {
-      book.shelf = shelf
-      this.setState({
-        books: this.state.books.filter(b => b.id !== book.id).concat(book)
-      });
-    })
-  }
-
-  updateQuery = (query) => {
-    this.setState({ query: query.trim() });
+      this.setState(prevState => ({
+        books: prevState.books.map(b => {
+          if (b.id === book.id) { b.shelf = shelf }
+          return b;
+        })
+      }));
+    });
   }
 
   render() {
-    const { books, query } = this.state;
-
-    let showingBooks;
-    if (query) {
-      const match = new RegExp(escapeRegExp(query), 'i');
-      showingBooks = books.filter(book => match.test(book.title));
-    } else {
-      showingBooks = books;
-    }
-
     return (
-      <Segment stacked>
-        <Input fluid
-          onChange={(event) => this.updateQuery(event.target.value)}
-          label='Search'
-          icon='search'
-          placeholder='Type here...'
-          style={{ padding: '.5em 0em' }}
-        />
-        {!showingBooks.length > 0 && query && <p style={{textAlign: 'center', padding: '2em 0'}}><strong>{this.state.query}</strong> No matches found!</p>}
-        <Shelf
-          books={showingBooks}
-          HandleChangingShelf={this.HandleChangingShelf}
-        />
-      </Segment>
+      <div>
+        <Segment stacked>
+          <Input fluid
+            onChange={event => this.filterBooks(event.target.value)}
+            label='Search'
+            icon='search'
+            placeholder='Type here...'
+          />
+
+          <Shelf
+            books={this.state.books}
+            updateShelf={this.updateShelf}
+          />
+        </Segment>
+      </div>
     )
   }
 }

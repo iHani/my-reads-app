@@ -15,40 +15,41 @@ class HomePage extends Component {
     })
   }
 
-  HandleChangingShelf = (book, shelf) => {
+  updateShelf = (book, shelf) => {
     BooksAPI.update(book, shelf).then(() => {
-      book.shelf = shelf
-      this.setState({
-        books: this.state.books.filter(b => b.id !== book.id).concat(book)
-      });
+      this.setState(prevState => ({
+        books: prevState.books.map(b => {
+          if (b.id === book.id) { b.shelf = shelf }
+          return b;
+        })
+      }));
     })
   }
 
   render() {
-    const books = this.state.books;
     return (
       <div>
         <Segment stacked>
           <Header as='h2'>Currently Reading</Header>
           <Shelf
-            books={books.filter(book => book.shelf === "currentlyReading")}
-            HandleChangingShelf={this.HandleChangingShelf}
+            books={this.state.books.filter(book => book.shelf === 'currentlyReading')}
+            updateShelf={this.updateShelf}
           />
         </Segment>
 
         <Segment stacked>
-          <Header as='h2'>Want to Read</Header>
+          <Header as='h2'>Want To Read</Header>
           <Shelf
-            books={books.filter(book => book.shelf === "wantToRead")}
-            HandleChangingShelf={this.HandleChangingShelf}
+            books={this.state.books.filter(book => book.shelf === 'wantToRead')}
+            updateShelf={this.updateShelf}
           />
         </Segment>
 
         <Segment stacked>
           <Header as='h2'>Read</Header>
           <Shelf
-            books={books.filter(book => book.shelf === "read")}
-            HandleChangingShelf={this.HandleChangingShelf}
+            books={this.state.books.filter(book => book.shelf === 'read')}
+            updateShelf={this.updateShelf}
           />
         </Segment>
       </div>
