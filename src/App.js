@@ -15,11 +15,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    BooksAPI.getAll().then(books => {
-      // we update the shelvedBooks state immediately so when we search we get
-      // the right shelf name for each book or 'None' if no shelf assigned
-      this.updateShelvedBooks(books);
-    })
+    BooksAPI.getAll().then(books => this.updateShelvedBooks(books))
   }
 
   // Will recieve an array of book objects and use it to update state.shelved
@@ -45,7 +41,7 @@ class App extends Component {
 
   render() {
     return (
-      <Container>
+      <Container style={{ marginTop: 50, marginBottom: 150 }}>
         <Header as='h1'>My Reads</Header>
         <Menu>
           <Link to='/'><Menu.Item >Home</Menu.Item></Link>
@@ -54,9 +50,7 @@ class App extends Component {
         <Route
           exact
           path='/'
-          render={() => <HomePage
-            updateShelvedBooks={this.updateShelvedBooks}
-          />}
+          render={() => <HomePage updateShelvedBooks={this.updateShelvedBooks} />}
         />
         <Route
           path='/search'

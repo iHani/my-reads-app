@@ -15,16 +15,16 @@ class HomePage extends Component {
     { title: 'Read', slug: 'read' }
   ]
 
-  componentDidMount() {
+  componentDidMount () {
     BooksAPI.getAll().then(books => {
       this.setState({ books });
     })
   }
 
-  componentWillUpdate() {
-    BooksAPI.getAll().then(books => {
-      this.setState({ books });
-    })
+  handleChangeShelf = (updatedBook) => {
+    this.setState(prevState => ({
+      books: prevState.books.filter(({ id }) => id !== updatedBook.id).concat(updatedBook)
+    }))
   }
 
   render() {
@@ -35,8 +35,8 @@ class HomePage extends Component {
             <Header as='h2'>{shelf.title}</Header>
             <Shelf
               books={this.state.books.filter(book => book.shelf === shelf.slug)}
+              handleChangeShelf={this.handleChangeShelf}
               updateShelvedBooks={this.props.updateShelvedBooks}
-              shelfUpdated={this.shelfUpdated}
             />
           </Segment>
         ))}

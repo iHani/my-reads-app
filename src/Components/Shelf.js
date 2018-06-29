@@ -15,6 +15,10 @@ class Shelf extends Component {
     BooksAPI.update(book, shelf)
     .then(res => {
       this.updateStateShelves(res);
+      if (this.props.handleChangeShelf) {
+        book.shelf = shelf
+        this.props.handleChangeShelf(book);
+      }
     });
   }
 

@@ -6,7 +6,8 @@ import Shelf from './Shelf';
 class SearchPage extends Component {
 
   state = {
-    books: []
+    books: [],
+    statusMessage: '',
   }
 
   queryBooks = (input) => {
@@ -14,9 +15,15 @@ class SearchPage extends Component {
     if (query) {
       BooksAPI.search(query)
       .then(result => {
-        const books = this.props.getShelves(result);
-        this.setState({ books });
+        if (!result.error) {
+          const books = this.props.getShelves(result);
+          this.setState({ books, statusMessage: '' });
+        } else {
+          this.setState({ books: [], statusMessage: 'No result found for ' + query });
+        }
       });
+    } else {
+      this.setState({ books: [], statusMessage: '' });
     }
   }
 
@@ -34,6 +41,7 @@ class SearchPage extends Component {
           books={this.state.books}
           updateShelvedBooks={updateShelvedBooks}
         />
+        {this.state.statusMessage}
       </Segment>
     )
   }
