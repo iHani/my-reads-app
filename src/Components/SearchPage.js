@@ -27,7 +27,7 @@ class SearchPage extends Component {
     }
   }
 
-  render() {
+  render () {
     const { updateShelvedBooks } = this.props;
     return (
       <Segment stacked>

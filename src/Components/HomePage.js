@@ -24,17 +24,17 @@ class HomePage extends Component {
   handleChangeShelf = (updatedBook) => {
     this.setState(prevState => ({
       books: prevState.books.filter(({ id }) => id !== updatedBook.id).concat(updatedBook)
-    }))
+    }));
   }
 
-  render() {
+  render () {
     return (
       <div>
-        {this.shelves.map(shelf => (
-          <Segment key={shelf.slug} stacked>
-            <Header as='h2'>{shelf.title}</Header>
+        {this.shelves.map(({ title, slug }) => (
+          <Segment key={slug} stacked>
+            <Header as='h2'>{title}</Header>
             <Shelf
-              books={this.state.books.filter(book => book.shelf === shelf.slug)}
+              books={this.state.books.filter(({ shelf }) => shelf === slug)}
               handleChangeShelf={this.handleChangeShelf}
               updateShelvedBooks={this.props.updateShelvedBooks}
             />

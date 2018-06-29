@@ -26,7 +26,7 @@ class ShelfChanger extends Component {
     }
   }
 
-  render() {
+  render () {
     const { book, shelf } = this.props;
     const trigger = (<span><Icon name='dropdown'/></span>);
     return (

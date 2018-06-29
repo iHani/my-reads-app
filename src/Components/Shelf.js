@@ -34,7 +34,7 @@ class Shelf extends Component {
     this.props.updateShelvedBooks(shelvedBooks);
   }
 
-  render() {
+  render () {
     return (
       <div>
         <Container>
@@ -43,7 +43,7 @@ class Shelf extends Component {
             {this.props.books.map((book) => (
               <List.Item key={book.id}>
                 <List.Content >
-                  <Image src={book.imageLinks.smallThumbnail} />
+                  <Image src={book.imageLinks && book.imageLinks.smallThumbnail ? book.imageLinks.smallThumbnail : ''} />
                   <List.Header style={{ maxWidth: '110px' }}>{book.title}</List.Header>
                   {book.publisher}
                 </List.Content>

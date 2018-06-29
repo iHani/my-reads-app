@@ -8,7 +8,7 @@ class BookRating extends Component {
     console.log(book.title, rating);
   }
 
-  render() {
+  render () {
     const { defaultRate, book } = this.props;
     return (
       <Rating

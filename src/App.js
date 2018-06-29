@@ -14,7 +14,7 @@ class App extends Component {
     shelvedBooks: []
   }
 
-  componentDidMount() {
+  componentDidMount () {
     BooksAPI.getAll().then(books => this.updateShelvedBooks(books))
   }
 
@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   // getShelves will retrieve the shelf name for each book
-  // this function is used for the result we get from booksApi.search()
+  // this function is used for the result we get from BooksAPI.search()
   getShelves = (books) => {
     const shelves = this.state.shelvedBooks;
     const updatedShelves = books.map(book => {
