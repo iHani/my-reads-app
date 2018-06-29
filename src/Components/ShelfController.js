@@ -22,7 +22,7 @@ class ShelfController extends Component {
     // 'defaultRate' is the current Shelf
     // 'value' is the new selected shelf
     if (defaultValue !== value) {
-      this.props.updateShelf(book, value)
+      this.props.updateShelf(book, value);
     }
   }
 

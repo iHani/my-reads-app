@@ -15,7 +15,7 @@ class Shelf extends Component {
     BooksAPI.update(book, shelf)
     .then(res => {
       this.updateStateShelves(res);
-    })
+    });
   }
 
   updateStateShelves = (res) => {

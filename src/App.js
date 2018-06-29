@@ -36,7 +36,7 @@ class App extends Component {
   getShelves = (books) => {
     const shelves = this.state.shelvedBooks;
     const updatedShelves = books.map(book => {
-      const bookInShelf = shelves.find(b => b.id === book.id);
+      const bookInShelf = shelves.find(({ id }) => id === book.id);
       book.shelf = bookInShelf ? bookInShelf.shelf : 'none';
       return book;
     })

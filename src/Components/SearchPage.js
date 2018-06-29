@@ -16,7 +16,7 @@ class SearchPage extends Component {
       .then(result => {
         const books = this.props.getShelves(result);
         this.setState({ books });
-      })
+      });
     }
   }
 

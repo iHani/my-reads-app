@@ -22,13 +22,13 @@ class ShelfChanger extends Component {
     const currentshelf = book.shelf;
     const newShelf = value;
     if (newShelf !== currentshelf) {
-      this.props.updateShelf(book, newShelf)
+      this.props.updateShelf(book, newShelf);
     }
   }
 
   render() {
     const { book, shelf } = this.props;
-    const trigger = (<span><Icon name='dropdown'/></span>)
+    const trigger = (<span><Icon name='dropdown'/></span>);
     return (
       <Dropdown
         book={book}
